@@ -51,11 +51,10 @@ class Queue():
         return self.datas.pop(index)
 
     # 큐 객체의 문자열 표현
-    
+    def __str__(self):
+        return f"Queue {self.datas}"
 
-
-
-if __name__ == "__main__":
+def _():
     q = Queue(3)
     print(q.datas)
     # 데이터의 추가
@@ -76,4 +75,39 @@ if __name__ == "__main__":
     poped = q.get()
     print(f"poped: {poped}\ndatas: {q.datas}")
     pass
+    print("===" * 10)
+    print(q)
 
+if __name__ == "__main__":
+    # while문을 무한 반복하여 프로그램을 구동할 거다.
+    # 외부에서 Queue 객체를 생성한 뒤,
+    # while문 내부에서 입력을 받아서 데이터를 저장, 추출 및 출력, 프로그램 종료
+    
+    # while문 외부에서 Queue 객체를 생성한 뒤 q 변수에 저장한다.
+    q = Queue()
+    # while문을 무한 반복한다(조건식을 == True)
+    while 1: # 1은 True로 취급된다.
+        # input_text 변수를 선언하여 그 값을 input("명령어 입력:")으로 초기화한다.
+        input_text = input("명령어 입력:")
+        # 만약에 입력된 값(input_text)이 "q"라면
+        if input_text == "q": # 탈출 조건
+            # while문을 탈출한다.
+            break
+        # 만약에 입력된 값이 "get" 문자열이라면
+        if input_text == "get": # 데이터 추출
+            # q 객체에 get 메서드를 이용하여 데이터를 추출한 뒤 data에 담아
+            data = q.get()
+            # data를 출력한다
+            print(data)
+        
+        # 입력된 데이터가 a로 시작하고 중간에 공백문자가 있으면
+        # 공백문자 뒤쪽을 데이터로 취급하여 데이터만 q.datas에 저장한다.
+        # 만약에 입력된 값.startwith("a")라면
+        if input_text.startswith("a"): # 첫글자가 a로 시작하면
+            # 입력된 값.split(" ") -> 공백문자를 구분자로 하여 문자열을 쪼갠다면
+            split_text = input_text.split(" ")
+            data = split_text[1] # 문자열 a 이후 첫번째 공백 직후의 값을 가리킨다.
+            q.append(int(data)) # 문자열을 정수로 변환한 뒤 queue 객체에 추가한다.
+
+        # 위의 모든 작업이 끝난 뒤엔 남은 데이터를 출력한다.
+        print(f"{q.datas}\n" + "="*10)
