@@ -16,7 +16,7 @@
 # 기하급수적으로 시행횟수가 증가해버린다.
 
 # 함수로 버블 정렬을 구현해보자.
-def bubble_sort(datas:list):
+def bubble_sort(datas:list, show:bool):
     # 1. 전달된 데이터를 반복문(for)으로 반복한다.
     for i in range(len(datas)):
         # 외부 반복은 path를 관장하며, 전체 데이터를 훑는 목적으로 사용된다.
