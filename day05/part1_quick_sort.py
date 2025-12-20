@@ -14,7 +14,7 @@
 # 1. 기본 케이스
 #   재귀함수의 재귀동작을 중단할 조건에 따라 재귀를 중단시키는 기본 케이스
 # 2. 재귀함수를 동작시키는 재귀케이스
-def quick_sort(datas:list) -> list:
+def quick_sort(datas:list, show:bool=False) -> list:
     # 기본 케이스
     # 전달받은 데이터의 요소 개수가 1개 이하이면 정렬할 필요가 없으므로
     # 그대로 반환한다.
@@ -32,16 +32,32 @@ def quick_sort(datas:list) -> list:
     right = [e for e in datas if e > pivot] # 피벗보다 큰 값들
 
     # 3. 나눠진 mid를 제외한 그룹들에 대해서 재귀적으로 이 동작을 반복한다.
-    sorted_left = quick_sort(left)
-    sorted_right = quick_sort(right)
+    sorted_left = quick_sort(left, show)
+    sorted_right = quick_sort(right, show)
 
     # 4. 정렬된 좌우 그룹을 피벗 그룹과 병합한다.
     result = sorted_left + mid + sorted_right # 리스트끼리의 덧셈연산은
     # 하나의 리스트로 병합하는 기능을 한다.
 
+    # option: 매개변수 show:bool의 값에 따라 중간과정을 출력
+    if show: print(result)
     # 5. 병합된 최종 결과를 반환한다.
     return result
 
 
 if __name__ == "__main__":
-    pass
+    import random as r
+    # 데이터 생성
+    datas = list(range(100000))
+    # datas = [3, 1, 4, 2, 3, 9, 1, 2, 8]
+    # 섞기
+    r.shuffle(datas)
+
+    # 섞인 데이터 확인
+    print(f"origin:\n\t{datas}")
+
+    # 섞인 데이터를 quick_sort() 함수에 전달
+    sorted_datas = quick_sort(datas, show=True)
+
+    # 정렬된 결과 출력
+    print(f"sorted:\n\t{sorted_datas}")
