@@ -45,6 +45,29 @@ def DFS_stack(graph:dict[str:list[str]], start:str, show:bool=False):
             stack.extend(not_visited)
         # 방문한 적이 있다면 아무것도 하지 않고 다음 반복으로 이동한다.
 
+# 2. 재귀함수를 이용한 깊이우선탐색 구현하기
+def DFS_recursive(graph:dict, start:int, visited=None):
+    # visited 변수가 None이면 최초호출이므로, 새로운 set을 생성한다
+    # if visited is None: visited = set()
+    # 한줄 코드
+    visited = visited or set()
+
+    # 현재 노드를 방문 처리
+    visited.add(start)
+    # 방문한 노드를 출력
+    print(start, end=' ')
+
+    # 현재 노드의 이웃 노드들을 탐색하고 재귀적으로 DFS 수행
+    neightbor_nodes:list = graph[start]
+    # 마지막 이웃부터 접근하려는 경우, 리스트를 반전시키고 진행해주어야 한다.
+    # for문은 0번째 요소부터 접근하기 때문.
+    neightbor_nodes.reverse()
+    for next_node in neightbor_nodes:
+        # visited에 포함되었는지 여부를 통해서
+        # 방문하지 않은 노드들에 대해 재귀적으로 DFS 수행
+        if next_node not in visited:
+            DFS_recursive(graph, next_node, visited)
+
 if __name__ == "__main__":
     # 인접 리스트를 이용한 그래프 표현
     graph = {
@@ -62,4 +85,6 @@ if __name__ == "__main__":
     print()
     # F -> E -> B -> D -> A -> C
     DFS_stack(graph, start="F", show=True)
-    
+    print()
+    print("=" * 20)
+    DFS_recursive(graph, start="F")
