@@ -46,7 +46,7 @@ def DFS_stack(graph:dict[str:list[str]], start:str, show:bool=False):
         # 방문한 적이 있다면 아무것도 하지 않고 다음 반복으로 이동한다.
 
 # 2. 재귀함수를 이용한 깊이우선탐색 구현하기
-def DFS_recursive(graph:dict, start:int, visited=None):
+def DFS_recursive(graph:dict, start:str, visited=None):
     # visited 변수가 None이면 최초호출이므로, 새로운 set을 생성한다
     # if visited is None: visited = set()
     # 한줄 코드
